@@ -92,7 +92,6 @@ switchTheme({
 | `type` | `fade` `circular` `inverted-circular` | Specifies animation type |
 | `duration` | `number` | Specifies duration in milliseconds |
 | `startingPoint` | `StartingPointConfig` | Configuration for the `circular` animation, where does the animation start in the screen |
-| `captureType` | `layer` or `hierarchy` | (iOS only) `layer` is the default and suitable for most cases, `hierarchy` is more complex and can cause flickering in (inverted-circular) animation, but it solves issue where some elements are not visible while animation is happening |
 
 ## startingPoint options
 | Name | Type | Description |
@@ -102,7 +101,7 @@ switchTheme({
 | `cxRatio` | `number` | Specifies starting percentage of x point for `circular` and `inverted-circular` animation (should be number between -1 and 1) |
 | `cyRatio` | `number` | Specifies starting percentage of y point for `circular` and `inverted-circular` animation (should be number between -1 and 1) |
 
-## Start Circular Animation from/to specific Button
+## Start Circular Animation from/to speceific Button
 If you would like the circular animation to start from/to a button/view on your ui automatically, you can do the following
 
 ```js
