@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "react_native_theme_switch",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ],
+  }
+}

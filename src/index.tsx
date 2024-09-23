@@ -1,10 +1,10 @@
-import { Platform, Dimensions } from 'react-native';
+import { Platform, Dimensions, NativeEventEmitter } from 'react-native';
 import type {
   AnimationConfig,
   CircularAnimationConfig,
   CircularAnimationConfigExact,
   ThemeSwitcherHookProps,
-} from './index.d';
+} from './types';
 import ThemeSwitchAnimationListener from './ThemeSwitchAnimationListener';
 import {
   calculateActualRation,
@@ -14,9 +14,10 @@ import {
 import module from './module';
 
 const IS_SUPPORTED_PLATFORM =
-  Platform.OS === 'android' || Platform.OS === 'ios';
+  Platform.OS === 'android' || Platform.OS === 'ios' || Platform.OS as string == 'harmony';
 let ThemeSwitchAnimation: any = null;
 let switchFunction: () => void = () => {};
+let eventEmitter = new NativeEventEmitter(module);
 let localAnimationConfig: AnimationConfig = {
   type: 'fade',
   duration: 500,
@@ -24,18 +25,18 @@ let localAnimationConfig: AnimationConfig = {
 
 if (IS_SUPPORTED_PLATFORM) {
   ThemeSwitchAnimation = module;
-
+  
   const themeSwitchAnimationListener = new ThemeSwitchAnimationListener();
 
   themeSwitchAnimationListener.addEventListener(() => {
-    setTimeout(() => {
-      if (switchFunction) {
-        switchFunction();
-        if (localAnimationConfig) {
-          unfreezeWrapper();
-        }
+    if (localAnimationConfig) {
+      unfreezeWrapper();
+      if(switchFunction) {
+        setTimeout(() => {
+          switchFunction();
+        },50)
       }
-    });
+    }
   });
 }
 
@@ -45,8 +46,9 @@ const switchTheme = ({
 }: ThemeSwitcherHookProps) => {
   if (IS_SUPPORTED_PLATFORM) {
     localAnimationConfig = animationConfig || localAnimationConfig;
-    ThemeSwitchAnimation.freezeScreen(animationConfig?.captureType || 'layer');
+    ThemeSwitchAnimation.freezeScreen();
     switchFunction = incomingSwitchThemeFunction;
+    eventEmitter.emit("FINISHED_FREEZING_SCREEN", null)
   } else {
     incomingSwitchThemeFunction();
   }
