@@ -25,7 +25,7 @@ let localAnimationConfig: AnimationConfig = {
 
 if (IS_SUPPORTED_PLATFORM) {
   ThemeSwitchAnimation = module;
-  
+
   const themeSwitchAnimationListener = new ThemeSwitchAnimationListener();
 
   themeSwitchAnimationListener.addEventListener(() => {
@@ -34,7 +34,12 @@ if (IS_SUPPORTED_PLATFORM) {
       if(switchFunction) {
         setTimeout(() => {
           switchFunction();
-        },50)
+          if(localAnimationConfig.type == 'circular'){
+            setTimeout(() => {
+              ThemeSwitchAnimation.getLastContent()
+            })
+          }
+        },30)
       }
     }
   });

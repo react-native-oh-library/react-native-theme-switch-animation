@@ -73,16 +73,20 @@ export class RNThemeSwitchTurboModule extends TurboModule implements TM.ThemeSwi
   }
 
   getLastContent(): void {
-    window.getLastWindow(this.ctx.uiAbilityContext, (err: BusinessError, win) => {
-      win.snapshot((err: BusinessError, pixelMap: image.PixelMap) => {
-        this.realViewPoint.pixmapLast = pixelMap;
-        const uiContext = win.getUIContext();
-        const overlayNode = uiContext.getOverlayManager()
-        const contentNode = new ComponentContent(uiContext!, wrapBuilder(buildContextThemeSwitchPress), this.realViewPoint);
-        this.overlayNodeD2 = overlayNode
-        this.contentNodeD2 = contentNode
+    this.overlayNodeD.removeComponentContent(this.contentNodeD)
+    setTimeout(() => {
+      window.getLastWindow(this.ctx.uiAbilityContext, (err: BusinessError, win) => {
+        win.snapshot((err: BusinessError, pixelMap: image.PixelMap) => {
+          this.realViewPoint.pixmapLast = pixelMap;
+          const uiContext = win.getUIContext();
+          const overlayNode = uiContext.getOverlayManager()
+          const contentNode = new ComponentContent(uiContext!, wrapBuilder(buildContextThemeSwitchPress), this.realViewPoint);
+          this.overlayNodeD2 = overlayNode
+          this.contentNodeD2 = contentNode
+          overlayNode.addComponentContent(contentNode)
+        })
       })
-    })
+    },20)
   }
 
   animationContent() {

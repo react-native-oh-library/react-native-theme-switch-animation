@@ -10,7 +10,7 @@ const LINKING_ERROR =
 const isTurboModuleEnabled = global.__turboModuleProxy != null;
 
 const IS_SUPPORTED_PLATFORM =
-  Platform.OS === 'android' || Platform.OS === 'ios' || Platform.OS as string == 'harmony';
+  Platform.OS === 'android' || Platform.OS === 'ios' || Platform.OS as string == 'harmony';;
 
 const module = (() => {
   if (IS_SUPPORTED_PLATFORM) {

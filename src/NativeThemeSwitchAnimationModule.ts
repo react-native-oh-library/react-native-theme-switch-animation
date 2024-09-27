@@ -10,8 +10,10 @@ export interface Spec extends TurboModule {
     cxRatio: Int32,
     cyRatio: Int32
   ): void;
+
   addListener: (eventName: string) => void;
   removeListeners: (count: number) => void;
+  getLastContent(): void;
 }
 
 export default TurboModuleRegistry.get<Spec>('ThemeSwitchAnimationNativeModule') as Spec | null;
