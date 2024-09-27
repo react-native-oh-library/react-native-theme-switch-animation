@@ -50,6 +50,8 @@ export struct RNThemeSwitchAnimation {
     this.x = display.getDefaultDisplaySync().width
     this.y = display.getDefaultDisplaySync().height
     this.z = Math.floor(Math.sqrt((this.x * this.x) + (this.y * this.y))/2)
+
+    console.log('type', this.type)
   }
 
   emit() {
@@ -106,6 +108,24 @@ export struct RNThemeSwitchAnimation {
     }
   }
 
+  circularAnimate() {
+    let _this = this
+    this.backAnimator = animator.create({
+      duration: this.duration,
+      easing: "linear",
+      delay: 0,
+      fill: "forwards",
+      direction: "normal",
+      iterations: 1,
+      begin: 0,
+      end: this.z + 200
+    })
+    this.backAnimator.onFrame = (value:number)=> {
+      _this.myScale = value
+      _this.officeSize = -1 * (value / 2)
+    }
+  }
+
   build() {
     Column(){
       if(this.type == 'fade') {
@@ -136,7 +156,34 @@ export struct RNThemeSwitchAnimation {
             .position({x: this.widthSize, y: this.heightSize})
             .offset({ x: this.officeSize, y: this.officeSize})
         )
-      } else if(this.type == 'circular') {}
+      } else if(this.type == 'circular') {
+        Stack() {
+          Row() {
+            Image(this.pixmap)
+          }
+          Row() {
+            Image(this.pixmapLast).onComplete(info => {
+              let wid = info?.width as number
+              let hei = info?.height as number
+              this.widthSize = wid * this.cxRatio + 'px'
+              this.heightSize = hei * this.cyRatio + 'px'
+              this.circularAnimate()
+              if (this.backAnimator) {
+                this.backAnimator.play()
+              }
+              setTimeout(() => {
+                this.emitInverted()
+              }, this.duration)
+            })
+          }.clipShape(
+            new CircleShape()
+              .width(this.myScale)
+              .height(this.myScale)
+              .position({x: this.widthSize, y: this.heightSize})
+              .offset({ x: this.officeSize, y: this.officeSize})
+          )
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@react-native-oh-tpl/react_native_theme_switch",
-  "version": "0.6.0-1.0.1",
+  "name": "react_native_theme_switch",
+  "version": "0.6.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",
   "author": "",
