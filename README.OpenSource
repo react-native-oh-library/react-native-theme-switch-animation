@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-theme-switch-animation",
+        "License": "MIT License",
+        "License File": "https://github.com/WadhahEssam/react-native-theme-switch-animation/blob/main/LICENSE",
+        "Version Number": "0.6.0",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/WadhahEssam/react-native-theme-switch-animation",
+        "Description": "A Plug & Play Animations for Switching (Dark/Light) themes."
+    }
+]
