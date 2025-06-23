@@ -18,7 +18,7 @@ class RNThemeSwitchTurboModuleFactory extends TurboModulesFactory {
   }
 
   hasTurboModule(name: string): boolean {
-    return name === TM.ThemeSwitchAnimationNativeModule.NAME;
+    return name === TM.ThemeSwitchAnimationModule.NAME;
   }
 }
 

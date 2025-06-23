@@ -29,7 +29,7 @@ export interface ContextMenuProps {
   isAnimating?: boolean
 }
 
-export class RNThemeSwitchTurboModule extends TurboModule implements TM.ThemeSwitchAnimationNativeModule.Spec {
+export class RNThemeSwitchTurboModule extends TurboModule implements TM.ThemeSwitchAnimationModule.Spec {
   windowClass: window.Window = {} as window.Window;
   realViewPoint: ContextMenuProps = {};
   isAnimating: boolean = false;

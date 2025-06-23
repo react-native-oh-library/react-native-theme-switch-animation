@@ -22,4 +22,4 @@ export interface Spec extends TurboModule {
   getLastContent(): void;
 }
 
-export default TurboModuleRegistry.get<Spec>('ThemeSwitchAnimationNativeModule') as Spec | null;
+export default TurboModuleRegistry.get<Spec>('ThemeSwitchAnimationModule') as Spec | null;
